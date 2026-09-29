@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dijkstra | Đường đi ngắn nhất</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="shell">
+    <header class="topbar">
+      <div class="brand"><span class="brand-mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="5" cy="6" r="2"/><circle cx="18" cy="5" r="2"/><circle cx="11" cy="18" r="2"/><path d="m7 6 9-1M6 8l4 8m7-9-5 9"/></svg></span><span>Đồ thị học</span></div>
+      <span class="top-note">THUẬT TOÁN · ĐƯỜNG ĐI NGẮN NHẤT</span>
+    </header>
+
+    <section class="heading">
+      <div><p class="eyebrow">Thuật toán tham lam / 01</p><h1>Dijkstra, từng bước một.</h1></div>
+      <p class="heading-copy">Tạo các cạnh có trọng số, chọn hai đỉnh và quan sát cách khoảng cách ngắn nhất được cập nhật qua từng lượt.</p>
+    </section>
+
+    <section class="workspace">
+      <section class="panel" aria-labelledby="graph-title">
+        <div class="panel-head"><h2 class="panel-title" id="graph-title">Đồ thị của bạn</h2><span class="panel-kicker" id="graph-count">0 ĐỈNH · 0 CẠNH</span></div>
+        <div class="graph-wrap"><svg id="graph" role="img" aria-label="Đồ thị có trọng số"></svg></div>
+        <div class="graph-foot">
+          <div class="legend"><span><i class="dot"></i>Điểm đầu</span><span><i class="dot end"></i>Điểm đến</span><span><i class="dot route"></i>Đường đi ngắn</span></div>
+          <div class="graph-actions"><button class="button" id="reset-all">Reset tất cả</button></div>
+        </div>
+
+        <form class="setup-row" id="node-form">
+          <div class="field"><label for="node-name">Tên đỉnh (tự nhập)</label><input id="node-name" type="text" placeholder="VD: A hoặc 1" autocomplete="off"></div>
+          <button class="button primary" type="submit">+ Thêm đỉnh</button>
+        </form>
+
+        <div class="controls">
+          <div class="field"><label for="source">Đỉnh bắt đầu</label><select id="source"></select></div>
+          <div class="field"><label for="target">Đỉnh kết thúc</label><select id="target"></select></div>
+        </div>
+
+        <form class="edge-form" id="edge-form">
+          <div class="field"><label for="edge-from">Nối từ</label><select id="edge-from"></select></div>
+          <div class="field"><label for="edge-to">Đến đỉnh</label><select id="edge-to"></select></div>
+          <div class="field"><label for="weight">Trọng số</label><input id="weight" type="number" min="0" step="any" value="1" required></div>
+          <button class="button primary" type="submit">+ Thêm cạnh</button>
+        </form>
+        <div class="mode-row"><span class="mode-label">Kiểu đồ thị</span><div class="segmented" role="group" aria-label="Kiểu đồ thị"><button type="button" class="active" data-mode="undirected">Vô hướng</button><button type="button" data-mode="directed">Có hướng</button></div></div>
+        <div class="edge-list"><div class="edge-list-head"><span>CẠNH HIỆN CÓ</span><span id="edge-total"></span></div><div class="edge-items" id="edge-list"></div></div>
+      </section>
+
+      <section class="panel" aria-labelledby="steps-title">
+        <div class="panel-head"><h2 class="panel-title" id="steps-title">Các bước chọn đỉnh</h2><span class="panel-kicker" id="step-count">CHƯA CHẠY</span></div>
+        <div class="table-scroll" id="step-table-wrap"><div class="table-empty">Chọn điểm đầu và điểm đến, sau đó nhấn <strong>Tìm đường đi</strong>.</div></div>
+        <div class="panel-head" style="border-top:1px solid var(--line);padding-top:12px;padding-bottom:12px">
+          <span class="panel-kicker">Mỗi ô là (khoảng cách tạm thời, đỉnh trước)</span>
+          <button class="button primary" id="run">▶ &nbsp;Tìm đường đi</button>
+        </div>
+        <section class="result-bar" aria-live="polite">
+          <div class="result-main"><span class="result-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 17 9 12l3 3 8-9"/><path d="M15 6h5v5"/></svg></span><div><p class="result-label" id="result-label">KẾT QUẢ ĐƯỜNG ĐI NGẮN NHẤT</p><div class="result-route" id="result-route">Chưa có kết quả</div></div></div>
+          <div class="result-distance"><span>TỔNG TRỌNG SỐ</span><strong id="result-distance">—</strong></div>
+        </section>
+      </section>
+    </section>
+  </main>
+  <div class="toast" id="toast" role="status"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
