@@ -1,1 +1,1 @@
-# Prim
+# Dijktra
